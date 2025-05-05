@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>PROYECTO TTS Y STT</title>
+</head>
+<body>
+    <h1>Conversor De Texto a Voz y Voz a Texto</h1>
+    <h2>PROYECTO TTS Y STT</h2>
+    <p>Escriba El Texto a Convertir</p>
+    <input type="text" id="textoavoz">
+    <button onclick="textoavoz ()">Convertir</button>
+    <h2>Converson De Voz a Texto</h2>
+    <button onclick="vozatexto()">Grabar</button>
+    <h2 id="vozatexto">Texto Transcrito</h2>
+    <script>
+
+        function textoavoz() {
+            let texto = document.getElementById("textoavoz").value
+            let utterance = new SpeechSynthesisUtterance(texto);
+            speechSynthesis.speak(utterance);
+        }
+
+        function vozatexto() {
+            const recognition = new webkitSpeechRecognition();
+            recognition.start();
+            recognition.onresult = function(event) {
+                document.getElementById("vozatexto").innerText = event.results[0][0].transcript;
+            }
+        }
+    </script>
+</body>
+</html>
